@@ -3,7 +3,7 @@ pcci-apps
 
 apps run at PCCI
 
-![Alt text](https://github.com/aliounedia/pcci-apps/blob/master/docs/dmt_timeout_screen.JPG "Optional title")
+![Alt text](https://raw.githubusercontent.com/aliounedia/pcci-apps/master/docs/dmt_timeout_screen.JPG "Optional title")
 
 
 
