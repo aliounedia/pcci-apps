@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib import admin
 
 # Register your models here.
@@ -8,6 +9,7 @@ from datetime import date
 
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
+from pcciprojects.daterange_filter.filter import DateRangeFilter
 
 class TimeOutListFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
@@ -120,7 +122,162 @@ class UserListFilter(admin.SimpleListFilter):
                 "main_userid", "main_userid").distinct()
 
 
+
+
+class FirstInputDayFilter(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = 'Jour: Debut'
+
+    # Parameter for the filter that will be used in the URL query.
+    template = 'first_input_day_filter.html'
+    parameter_name = 'first_input_day'
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        # Compare the requested value (either '80s' or '90s')
+        # to decide how to filter the queryset.
+
+
+        print "The get  "
+        print request.GET
+        if self.value():
+            return queryset.filter(main_userid =self.value())
         
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        return Main.objects.filter(
+            main_dateappel__gt =date.today()).values_list(
+                "main_userid", "main_userid").distinct()
+
+
+class LastInputDayFilter(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = 'Jour:Fin'
+
+    # Parameter for the filter that will be used in the URL query.
+    template = 'last_input_day_filter.html'
+    parameter_name = 'last_input_day'
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        # Compare the requested value (either '80s' or '90s')
+        # to decide how to filter the queryset.
+
+
+        print "The get  "
+        print request.GET
+        if self.value():
+            return queryset.filter(main_userid =self.value())
+        
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        return Main.objects.filter(
+            main_dateappel__gt =date.today()).values_list(
+                "main_userid", "main_userid").distinct()
+
+
+
+
+
+class FirstInputMonthFilter(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = _('Jour: Debut')
+
+    # Parameter for the filter that will be used in the URL query.
+    template = 'first_input_month_filter.html'
+    parameter_name = 'first_input_month'
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        # Compare the requested value (either '80s' or '90s')
+        # to decide how to filter the queryset.
+
+
+        print "The get  "
+        print request.GET
+        if self.value():
+            return queryset.filter(main_userid =self.value())
+        
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        return Main.objects.filter(
+            main_dateappel__gt =date.today()).values_list(
+                "main_userid", "main_userid").distinct()
+
+
+
+
+class LastInputMonthFilter(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = 'Jour: Fin'
+
+    # Parameter for the filter that will be used in the URL query.
+    template = 'last_input_month_filter.html'
+    parameter_name = 'last_input_month'
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        # Compare the requested value (either '80s' or '90s')
+        # to decide how to filter the queryset.
+
+
+        print "The get  "
+        print request.GET
+        if self.value():
+            return queryset.filter(main_userid =self.value())
+        
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        return Main.objects.filter(
+            main_dateappel__gt =date.today()).values_list(
+                "main_userid", "main_userid").distinct()
+
+
+
 class MainAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         return [f.name for f in self.model._meta.fields]
@@ -160,7 +317,11 @@ class MainAdmin(admin.ModelAdmin):
     list_display = ('main_userid',admin_main_fichier, admin_main_dateappel,
                     admin_main_tempscom, admin_timeout_count, admin_on_timeout)
     # No link 
-    list_filter   = (TimeOutListFilter,UserListFilter,FileListFilter)
+    list_filter   = (
+                     FirstInputDayFilter  ,LastInputDayFilter,
+                     FirstInputMonthFilter,LastInputMonthFilter,
+                     TimeOutListFilter,UserListFilter,FileListFilter
+                     )
 
   
        
