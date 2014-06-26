@@ -1,0 +1,20 @@
+{% load i18n %}
+<h3>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
+<!-- First Day -->
+ <li>
+  <select name ='hour_end'>  
+  {% for choice in choices %}
+     <option value="{{ choice.value }}" {% if choice.selected %} selected {% endif %} >{{ choice.value}}</option>
+  {% endfor %}
+  </select> 
+</li
+ <!-- last Day -->
+
+
+
+
+
+
+
+
+ 

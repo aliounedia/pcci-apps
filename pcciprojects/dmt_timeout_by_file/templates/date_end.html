@@ -1,0 +1,12 @@
+{% load i18n %}
+<h3>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
+<!-- First Month -->
+<li>
+<input type="text" name ="date_end" id="datepicker2" value ="{{ choices.0.selected }}">
+</li>
+<!-- Last Month -->
+ <li>
+  <input type ='submit' value ='Go' />
+ </li>
+</form>
+</ul>

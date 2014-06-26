@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for pcciprojects project.
 
@@ -13,6 +14,9 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
+# timeout setting value
+TIMEOUT = 300
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -26,7 +30,10 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+print  'Base DIR'
+print  BASE_DIR
 
+TEMPLATE_DIRS =  [BASE_DIR + '\pcciprojects\dmt_timeout\templates'] 
 # Application definition
 
 INSTALLED_APPS = (
@@ -35,8 +42,11 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'pcciprojects.daterange_filter',
     'django.contrib.staticfiles',
-    'pcciprojects.dmt_timeout'
+    'pcciprojects.dmt_timeout',
+    'pcciprojects.dmt_timeout_by_file'
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -65,7 +75,7 @@ DATABASES = {
   'default': {
     'NAME': 'canal',
     'ENGINE': 'django.db.backends.mysql',
-    'USER': 'xxxxx',
+    'USER': 'xxxx',
     'PASSWORD': 'xxxx',
     'HOST' : 'xxxxx',
     'PORT' : 3306,

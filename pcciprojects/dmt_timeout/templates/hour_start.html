@@ -1,0 +1,23 @@
+{% load i18n %}
+<h3>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
+<ul>
+<form>
+<!-- First Day -->
+ <li>
+  <select name ='hour_start'>  
+  {% for choice in choices %}
+     <option value="{{ choice.value }}" {% if choice.selected %} selected {% endif %} >{{ choice.value}}</option>
+  {% endfor %}
+  </select> 
+</li>
+<!-- First Day -->
+
+
+
+
+
+
+
+
+
+ 
